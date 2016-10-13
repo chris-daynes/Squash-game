@@ -37,20 +37,21 @@ $(document).ready(function(){
     };
   }
 
+
   function ballMove (){
     var bop = new Audio();
-    var padSound = new Audio();
-    //var gameover = new Audio();
-    // gameover.src = 'game_over.wav';
-      bop.src = 'bleep1.mp3';
-      padSound.src = 'paddle.wav';
+    // //var padSound = new Audio();
+    // //var gameover = new Audio();
+    // // gameover.src = 'game_over.wav';
+    bop.src = 'bleep1.mp3';
+    // //padSound.src = 'paddle.wav';
     //these two lines changes ball position incrementally by ballSpeed.
     ballX += ballSpeedX;
     ballY += ballSpeedY;
       //here if the ball goes beyound the baseline.
       if(ballY > ctx.canvas.height){
         if(ballX>paddleX && ballX<paddleX+paddleWidth){
-          padSound.play();
+          //padSound.play();
           //change ball velocity if hit on the angle
           var deltaX = ballX - (paddleX + paddleWidth/2);
           ballSpeedX = deltaX * 0.35;
@@ -62,16 +63,17 @@ $(document).ready(function(){
         }
       }
       if(ballY < 0){
-        ballSpeedY = -ballSpeedY;
         bop.play();
+        ballSpeedY = -ballSpeedY;
       }
       if (ballX > ctx.canvas.width) {
-        ballSpeedX = -ballSpeedX;
         bop.play();
+        ballSpeedX = -ballSpeedX;
       }
       if (ballX < 0) {
-        ballSpeedX = -ballSpeedX;
         bop.play();
+        ballSpeedX = -ballSpeedX;
+
       }
   }
 
