@@ -40,11 +40,11 @@ function calculateMousePos(e){
 }
 
 function ballMove (){
-  var bop = new Audio();
+  //var bop = new Audio();
   var padSound = new Audio();
   var gameover = new Audio();
   gameover.src = 'game_over.wav';
-  bop.src = 'bleep1.mp3';
+  //bop.src = 'bleep1.mp3';
   padSound.src = 'paddle.wav';
   //these two lines changes ball position incrementally by ballSpeed.
   ballX += ballSpeedX;
@@ -64,16 +64,16 @@ function ballMove (){
       }
     }
     if(ballY < 0){
-      bop.play();
       ballSpeedY = -ballSpeedY;
+      padSound.play();
     }
     if (ballX > ctx.canvas.width) {
-      bop.play();
       ballSpeedX = -ballSpeedX;
+      padSound.play();
     }
     if (ballX < 0) {
-      bop.play();
       ballSpeedX = -ballSpeedX;
+      padSound.play();
     }
 }
 
