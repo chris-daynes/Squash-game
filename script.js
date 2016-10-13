@@ -7,8 +7,8 @@ var paddleWidth = 100;
 var cW = ctx.canvas.width, cH = ctx.canvas.height;
 
 
-window.onload = function(){
-
+//window.onload = function(){
+document.addEventListener('DOMContentLoaded', function(){
 
 
   function animate(){
@@ -27,7 +27,7 @@ window.onload = function(){
     var mousePos = calculateMousePos(e);
     paddleX = mousePos.x - paddleWidth/2;
   });
-};
+//};
 
 
 function calculateMousePos(e){
@@ -40,11 +40,11 @@ function calculateMousePos(e){
 }
 
 function ballMove (){
-  //var bop = new Audio();
+  var bop = new Audio();
   var padSound = new Audio();
   var gameover = new Audio();
   gameover.src = 'game_over.wav';
-  //bop.src = 'bleep1.mp3';
+  bop.src = 'bleep1.mp3';
   padSound.src = 'paddle.wav';
   //these two lines changes ball position incrementally by ballSpeed.
   ballX += ballSpeedX;
@@ -65,15 +65,15 @@ function ballMove (){
     }
     if(ballY < 0){
       ballSpeedY = -ballSpeedY;
-      padSound.play();
+      bop.play();
     }
     if (ballX > ctx.canvas.width) {
       ballSpeedX = -ballSpeedX;
-      padSound.play();
+      bop.play();
     }
     if (ballX < 0) {
       ballSpeedX = -ballSpeedX;
-      padSound.play();
+      bop.play();
     }
 }
 
@@ -101,3 +101,4 @@ function ball (x, y, radius, color) {
   ctx.arc(x, y, radius, 0, Math.PI*2);
   ctx.fill();
 }
+});
