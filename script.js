@@ -1,15 +1,15 @@
 
+
+
+
+//window.onload = function(){
+document.addEventListener('DOMContentLoaded', function(){
 var ctx = document.getElementById('game').getContext('2d');
 var ballY = 0, ballX = ctx.canvas.width/2;
 var ballSpeedY = 10, ballSpeedX = 10;
 var paddleX = 200; //x position of paddle
 var paddleWidth = 100;
 var cW = ctx.canvas.width, cH = ctx.canvas.height;
-
-
-//window.onload = function(){
-document.addEventListener('DOMContentLoaded', function(){
-
 
   function animate(){
     ctx.save();
