@@ -9,6 +9,8 @@ var cW = ctx.canvas.width, cH = ctx.canvas.height;
 
 window.onload = function(){
 
+
+
   function animate(){
     ctx.save();
     ctx.clearRect(0,0,cW, cH);
@@ -38,28 +40,39 @@ function calculateMousePos(e){
 }
 
 function ballMove (){
+  var bop = new Audio();
+  var padSound = new Audio();
+  var gameover = new Audio();
+  gameover.src = 'game_over.wav';
+  bop.src = 'bleep1.mp3';
+  padSound.src = 'paddle.wav';
   //these two lines changes ball position incrementally by ballSpeed.
   ballX += ballSpeedX;
   ballY += ballSpeedY;
     //here if the ball goes beyound the baseline.
     if(ballY > ctx.canvas.height){
       if(ballX>paddleX && ballX<paddleX+paddleWidth){
+        padSound.play();
         //change ball velocity if hit on the angle
         var deltaX = ballX - (paddleX + paddleWidth/2);
         ballSpeedX = deltaX * 0.35;
         ballSpeedY = -ballSpeedY;
       }
       else {
+        gameover.play();
         resetBall();
       }
     }
     if(ballY < 0){
+      bop.play();
       ballSpeedY = -ballSpeedY;
     }
     if (ballX > ctx.canvas.width) {
+      bop.play();
       ballSpeedX = -ballSpeedX;
     }
     if (ballX < 0) {
+      bop.play();
       ballSpeedX = -ballSpeedX;
     }
 }
