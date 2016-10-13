@@ -3,7 +3,7 @@
 
 
 //window.onload = function(){
-document.addEventListener('DOMContentLoaded', function(){
+$(document).ready(function(){
 var ctx = document.getElementById('game').getContext('2d');
 var ballY = 0, ballX = ctx.canvas.width/2;
 var ballSpeedY = 10, ballSpeedX = 10;
