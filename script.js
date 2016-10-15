@@ -8,6 +8,9 @@ $(document).ready(function(){
   var paddleX = 200; //x position of paddle
   var paddleWidth = 100;
   var cW = ctx.canvas.width, cH = ctx.canvas.height;
+  var wallSound = new sound('bleep1.mp3');
+  var paddleSound = new sound('paddle.wav');
+  var gameOverSound = new sound('game_over.wav');
 
   function animate(){
     ctx.save();
@@ -39,11 +42,11 @@ $(document).ready(function(){
 
 
   function ballMove (){
-    var bop = new Audio();
+    //var bop = new Audio();
     // //var padSound = new Audio();
     // //var gameover = new Audio();
     // // gameover.src = 'game_over.wav';
-    bop.src = 'bleep1.mp3';
+    //bop.src = 'bleep1.mp3';
     // //padSound.src = 'paddle.wav';
     //these two lines changes ball position incrementally by ballSpeed.
     ballX += ballSpeedX;
@@ -51,27 +54,29 @@ $(document).ready(function(){
       //here if the ball goes beyound the baseline.
       if(ballY > ctx.canvas.height){
         if(ballX>paddleX && ballX<paddleX+paddleWidth){
-          //padSound.play();
-          //change ball velocity if hit on the angle
+          paddleSound.play();
           var deltaX = ballX - (paddleX + paddleWidth/2);
           ballSpeedX = deltaX * 0.35;
           ballSpeedY = -ballSpeedY;
         }
         else {
-          //gameover.play();
+          gameOverSound.play();
           resetBall();
         }
       }
       if(ballY < 0){
-        bop.play();
+        wallSound.play();
+        //bop.play();
         ballSpeedY = -ballSpeedY;
       }
       if (ballX > ctx.canvas.width) {
-        bop.play();
+        wallSound.play();
+        //bop.play();
         ballSpeedX = -ballSpeedX;
       }
       if (ballX < 0) {
-        bop.play();
+        wallSound.play();
+        //bop.play();
         ballSpeedX = -ballSpeedX;
 
       }
@@ -101,4 +106,20 @@ $(document).ready(function(){
     ctx.arc(x, y, radius, 0, Math.PI*2);
     ctx.fill();
   }
+
+  //sound constructor
+  function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+        this.sound.play();
+    };
+    this.stop = function(){
+        this.sound.pause();
+    };
+}
 });
